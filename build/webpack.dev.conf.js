@@ -16,7 +16,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         rules: utils.styleLoaders({sourceMap: true, usePostCSS: true})
     },
     devtool: "eval-source-map",
-    mode: 'development',
     devServer: {
         contentBase: './dist',
         clientLogLevel: 'warning',
@@ -36,7 +35,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': 'development'
+            'process.env': "'development'"
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
