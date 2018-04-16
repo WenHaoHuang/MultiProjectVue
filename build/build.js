@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'production'
+
 const path = require('path')
 const ora = require('ora')
 const rm = require('rimraf')

@@ -5,10 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 const pk = require('./../package.json')
 
-
 module.exports = {
     context: path.resolve(__dirname, '../'),
-    // entry: utils.entries(),
     entry: {
         app: './src/pages/' + pk.DIR + '/main.js'
     },
