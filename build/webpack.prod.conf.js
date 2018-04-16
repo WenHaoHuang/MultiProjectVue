@@ -2,9 +2,7 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseWebpackConfig = require('./webpack.base.conf')
-const pk = require('./../package.json')
 
 const webpackConfig = merge(baseWebpackConfig, {
     mode: 'production',
@@ -41,9 +39,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         }
     },
     plugins: [
-        // new CleanWebpackPlugin(['dist/' + pk.DIR], {
-        //     root: utils.resolve('')
-        // }),
         new webpack.DefinePlugin({
             'process.env': "'production'"
         }),

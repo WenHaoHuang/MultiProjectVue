@@ -2,6 +2,7 @@ const path = require('path')
 const utils = require('./utils')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 const pk = require('./../package.json')
 
