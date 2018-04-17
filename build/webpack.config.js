@@ -20,10 +20,10 @@ module.exports = {
     build:{
         NODE_ENV: '"production"',
         index: utils.resolve('dist/index.html'),
-        assetsRoot: utils.resolve('dist'),
-        assetsSubDirectory: utils.resolve('static'),
+        assetsRoot: utils.resolve(`dist/${pk.DIR}`),
+        assetsSubDirectory: utils.resolve(`dist/${pk.DIR}/static`),
         assetsPublicPath: './',
-        productionSourceMap: true,
+        productionSourceMap: false,
         devtool: '#source-map',
         productionGzip: false,
         productionGzipExtensions: ['js', 'css'],
