@@ -1,18 +1,20 @@
 <template>
-    <div id="header" class="header">
-        <a href="#/index" id="logo" class="logo"></a>
-        <div class="item-register">立即开户</div>
-        <div class="item-login">用户登录</div>
-        <div class="nav" :class="{'active':isActive}">
-            <div class="icon-menu" @click="isActive = !isActive"></div>
-            <div class="list-menu">
-                <a href="#/index" class="item">首页</a>
-                <a href="#/index" class="item">关于我们</a>
-                <a href="#/index" class="item">产品介绍</a>
-                <a href="#/index" class="item">数据中心</a>
-                <a href="#/index" class="item">投资学院</a>
-                <a href="#/index" class="item">MT4下载</a>
-                <a href="#/index" class="item">联系我们</a>
+    <div id="header">
+        <div class="header">
+            <a href="#/index" id="logo" class="logo"></a>
+            <div class="item-register">立即开户</div>
+            <div class="item-login">用户登录</div>
+            <div class="nav" :class="{'active':isActive}">
+                <div class="icon-menu" @click="isActive = !isActive"></div>
+                <div class="list-menu">
+                    <a href="#/index" class="item">首页</a>
+                    <a href="#/index" class="item">关于我们</a>
+                    <a href="#/index" class="item">产品介绍</a>
+                    <a href="#/index" class="item">数据中心</a>
+                    <a href="#/index" class="item">投资学院</a>
+                    <a href="#/index" class="item">MT4下载</a>
+                    <a href="#/index" class="item">联系我们</a>
+                </div>
             </div>
         </div>
     </div>
@@ -30,6 +32,10 @@
 </script>
 
 <style lang="scss">
+    #header{
+        height: 0.8rem;
+        width:100%;
+    }
     .header {
         position: fixed;
         z-index: 10;
