@@ -6,36 +6,39 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const chalk = require('chalk')
-const ip = require('ip');
+const ip = require('ip')
+const config = require('./webpack.config')
 
 const HOST = ip.address()
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
     module: {
-        rules: utils.styleLoaders({sourceMap: true, usePostCSS: true})
+        rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
     },
-    devtool: "eval-source-map",
+    devtool: config.dev.devtool,
     devServer: {
-        contentBase: './dist',
         clientLogLevel: 'warning',
         historyApiFallback: true,
         hot: true,
+        contentBase: false,
         compress: true,
         host: HOST,
         port: PORT || 8080,
-        open: false,
-        overlay: {warnings: false, errors: true},
-        publicPath: '/',
-        proxy: {},
+        open: config.dev.autoOpenBrowser,
+        overlay: config.dev.errorOverlay
+            ? { warnings: false, errors: true }
+            : false,
+        publicPath: config.dev.assetsPublicPath,
+        proxy: config.dev.proxyTable,
         quiet: true,
         watchOptions: {
-            poll: false,
+            poll: config.dev.poll,
         }
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': "'development'"
+            'process.env': config.dev.NODE_ENV
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),

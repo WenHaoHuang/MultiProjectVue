@@ -91,37 +91,3 @@ exports.createNotifierCallback = () => {
         })
     }
 }
-// 多入口配置
-exports.entries = () => {
-    const entryFiles = glob.sync(PAGE_PATH + '/!(_**)/main.js')
-    const map = {}
-    entryFiles.forEach((filePath) => {
-        const pathArr = filePath.split('\/')
-        const pathName = pathArr[pathArr.length - 2]
-        map[pathName] = filePath
-    })
-    return map;
-}
-// 多页面输出配置
-exports.htmlPlugin = () => {
-    const entryFiles = glob.sync(PAGE_PATH + '/!(_**)/main.js')
-    const arr = []
-    entryFiles.forEach((filePath) => {
-        const pathArr = filePath.split('\/')
-        const pathName = pathArr[pathArr.length - 2]
-        let conf = {
-            template: './src/index.template.html',
-            filename: pathName + '/index.html',
-            chunks: ['commons', pathName],
-            inject: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeAttributeQuotes: true
-            },
-            chunksSortMode: 'dependency'
-        }
-        arr.push(new HtmlWebpackPlugin(conf))
-    })
-    return arr;
-}

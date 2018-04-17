@@ -6,19 +6,20 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const baseWebpackConfig = require('./webpack.base.conf')
+const config = require('./webpack.config')
 
 const webpackConfig = merge(baseWebpackConfig, {
-    devtool: "#source-map",
+    devtool: config.build.productionSourceMap ? config.build.devtool : false,
     module: {
         rules: utils.styleLoaders({
-            sourceMap: true,
+            sourceMap: config.build.productionSourceMap,
             extract: true,
             usePostCSS: true
         })
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': "'production'"
+            'process.env': config.build.NODE_ENV
         }),
         new UglifyJsPlugin({
             uglifyOptions: {
@@ -26,7 +27,7 @@ const webpackConfig = merge(baseWebpackConfig, {
                     warnings: false
                 }
             },
-            sourceMap: true,
+            sourceMap: config.build.productionSourceMap,
             parallel: true
         }),
         new ExtractTextPlugin({
@@ -34,7 +35,9 @@ const webpackConfig = merge(baseWebpackConfig, {
             allChunks: true,
         }),
         new OptimizeCSSPlugin({
-            cssProcessorOptions: {safe: true, map: {inline: false}}
+            cssProcessorOptions: config.build.productionSourceMap
+                ? { safe: true, map: { inline: false } }
+                : { safe: true }
         }),
         new webpack.HashedModuleIdsPlugin(),
         new webpack.optimize.ModuleConcatenationPlugin(),
@@ -62,6 +65,10 @@ const webpackConfig = merge(baseWebpackConfig, {
         }),
     ]
 })
+if (config.build.bundleAnalyzerReport) {
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
 
 
 module.exports = webpackConfig

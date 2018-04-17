@@ -2,9 +2,9 @@ const path = require('path')
 const utils = require('./utils')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.conf')
 const pk = require('./../package.json')
+const config = require('./webpack.config')
 
 module.exports = {
     context: path.resolve(__dirname, '../'),
@@ -14,29 +14,34 @@ module.exports = {
     output: {
         path: utils.resolve('dist/' + pk.DIR),
         filename: 'static/js/[name].js?v=[hash:4]',
-        chunkFilename: 'static/js/[name].js?v=[hash:4]'
+        publicPath: process.env.NODE_ENV === 'production'
+            ? config.build.assetsPublicPath
+            : config.dev.assetsPublicPath
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': utils.resolve('src'),
-            'components': utils.resolve('components'),
-            'assets': utils.resolve('src/assets'),
             'static': utils.resolve('static'),
+            'components': utils.resolve('src/components'),
             'filter': utils.resolve('src/filter'),
+            'common': utils.resolve('src/common'),
+            'assets': utils.resolve(`src/pages/${pk.DIR}/assets`),
         }
     },
     plugins: [
         new CopyWebpackPlugin([
             {
                 from: utils.resolve('static'),
-                to: utils.resolve('dist/static'),
+                to: process.env.NODE_ENV === 'production'
+                    ? config.build.assetsSubDirectory
+                    : config.dev.assetsSubDirectory,
                 ignore: ['.*']
             }
         ]),
         new HtmlWebpackPlugin({
-            template: './src/index.template.html',
+            template: `./src/pages/${pk.DIR}/template.html`,
             filename: 'index.html',
             inject: true,
             minify: {

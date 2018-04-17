@@ -1,15 +1,12 @@
 <template>
-    <article>
-        this is index
+    <article id="header">
+        <img src="./img/logo-head.png" alt="">
     </article>
 </template>
 
 <script>
     export default {
-        name: "index",
-        data(){
-            return {}
-        },
+        name: "index"
     }
 </script>
 

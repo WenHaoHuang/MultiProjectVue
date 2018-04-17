@@ -16,10 +16,10 @@ Vue.use(filter)
 import notify from 'components/notice/index'
 Vue.use(notify)
 
-import ajax from 'assets/js/ajax.js'
+import ajax from 'common/js/ajax.js'
 Vue.use(ajax)
 
-import utils from 'assets/js/utils.js'
+import utils from 'common/js/utils.js'
 Vue.prototype.$utils = utils
 
 import EChart from 'components/EChart'
