@@ -6,13 +6,7 @@ module.exports = {
         NODE_ENV: '"development"',
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        proxyTable: {
-            '/api':{
-                changeOrigin:true,
-                target: "http://api.host.com",
-                secure: false
-            }
-        },
+        proxyTable: {},
         host: 'localhost',
         port: 8080,
         autoOpenBrowser: false,
@@ -27,8 +21,8 @@ module.exports = {
         NODE_ENV: '"production"',
         index: utils.resolve('dist/index.html'),
         assetsRoot: utils.resolve('dist'),
-        assetsSubDirectory: utils.resolve('dist/static'),
-        assetsPublicPath: '/' + pk.DIR + '/',
+        assetsSubDirectory: utils.resolve('static'),
+        assetsPublicPath: './',
         productionSourceMap: true,
         devtool: '#source-map',
         productionGzip: false,

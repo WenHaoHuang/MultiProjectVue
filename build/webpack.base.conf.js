@@ -40,6 +40,15 @@ module.exports = {
                 ignore: ['.*']
             }
         ]),
+        new CopyWebpackPlugin([
+            {
+                from: utils.resolve(`src/pages/${pk.DIR}/static`),
+                to: process.env.NODE_ENV === 'production'
+                    ? config.build.assetsPublicPath
+                    : config.dev.assetsSubDirectory,
+                ignore: ['.*']
+            }
+        ]),
         new HtmlWebpackPlugin({
             template: `./src/pages/${pk.DIR}/template.html`,
             filename: 'index.html',
